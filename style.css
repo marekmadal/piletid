@@ -106,7 +106,7 @@ body {
     background-color: #bbb;
 }
 
-#print-btn {
+#print-btn, #hide-btn {
     margin-top: 10px;
     padding: 3px 6px;
     border: none;
@@ -118,7 +118,7 @@ body {
     transition: background-color 0.3s;
 }
 
-#print-btn:hover {
+#print-btn:hover, #hide-btn:hover {
     background-color: #bbb;
 }
 

@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameList = document.getElementById('name-list');
     const paginationControls = document.getElementById('pagination-controls');
     const printBtn = document.getElementById('print-btn');
+    const hideBtn = document.getElementById('hide-btn');
+    const nameListContainer = document.getElementById('name-list-container');
     const body = document.body;
 
     let numberPool = [];
@@ -151,8 +153,17 @@ document.addEventListener('DOMContentLoaded', () => {
         printWindow.print();
     };
 
+    const toggleComments = () => {
+        const commentFields = document.querySelectorAll('.comment-input');
+        commentFields.forEach(field => {
+            field.style.display = field.style.display === 'none' ? 'block' : 'none';
+        });
+        hideBtn.textContent = hideBtn.textContent === 'Peida kommentaarid' ? 'Näita kommentaare' : 'Peida kommentaarid';
+    };
+
     generateBtn.addEventListener('click', generateNumber);
     printBtn.addEventListener('click', printSidebar);
+    hideBtn.addEventListener('click', toggleComments);
 
     // Create a dark mode toggle button
     const darkModeBtn = document.createElement('button');
