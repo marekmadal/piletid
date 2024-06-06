@@ -257,6 +257,15 @@ button:hover {
     background-color: #104e8b;
 }
 
+.dark-mode .pagination-btn {
+    background-color: #888;
+    color: #f0f0f0;
+}
+
+.dark-mode .pagination-btn:hover {
+    background-color: #666;
+}
+
 .dark-mode-btn {
     position: fixed;
     bottom: 20px;
