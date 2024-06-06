@@ -84,6 +84,44 @@ body {
     resize: vertical;
 }
 
+#pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.pagination-btn {
+    margin: 0 3px;
+    padding: 3px 6px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ddd;
+    color: #333;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background-color 0.3s;
+}
+
+.pagination-btn:hover {
+    background-color: #bbb;
+}
+
+#print-btn {
+    margin-top: 10px;
+    padding: 3px 6px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ddd;
+    color: #333;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background-color 0.3s;
+}
+
+#print-btn:hover {
+    background-color: #bbb;
+}
+
 .container {
     text-align: center;
     background: #fff;

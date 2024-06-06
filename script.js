@@ -5,10 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const numberDisplay = document.getElementById('number-display');
     const generatedNumbersContainer = document.getElementById('generated-numbers');
     const nameList = document.getElementById('name-list');
+    const paginationControls = document.getElementById('pagination-controls');
+    const printBtn = document.getElementById('print-btn');
     const body = document.body;
 
     let numberPool = [];
     let usedNumbers = [];
+    let namesAndComments = [];
+    let currentPage = 0;
+    const itemsPerPage = 5;
 
     const generateNumber = () => {
         const min = parseInt(minInput.value);
@@ -45,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
         numberDisplay.textContent = randomNumber;
         displayGeneratedNumber(randomNumber);
         addNameFields(randomNumber);
+        updatePaginationControls();
+        showPage(currentPage);
     };
 
     const reintroduceNumber = (number) => {
@@ -86,8 +93,31 @@ document.addEventListener('DOMContentLoaded', () => {
         
         listItem.appendChild(inputContainer);
         listItem.appendChild(commentInput);
-        
-        nameList.appendChild(listItem);
+
+        namesAndComments.push(listItem);
+    };
+
+    const updatePaginationControls = () => {
+        paginationControls.innerHTML = '';
+
+        const totalPages = Math.ceil(namesAndComments.length / itemsPerPage);
+        for (let i = 0; i < totalPages; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.textContent = i + 1;
+            pageBtn.classList.add('pagination-btn');
+            pageBtn.addEventListener('click', () => showPage(i));
+            paginationControls.appendChild(pageBtn);
+        }
+    };
+
+    const showPage = (page) => {
+        nameList.innerHTML = '';
+        currentPage = page;
+        const start = page * itemsPerPage;
+        const end = start + itemsPerPage;
+        const itemsToShow = namesAndComments.slice(start, end);
+
+        itemsToShow.forEach(item => nameList.appendChild(item));
     };
 
     const toggleDarkMode = () => {
@@ -102,7 +132,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const printSidebar = () => {
+        const printWindow = window.open('', '', 'height=400,width=800');
+        printWindow.document.write('<html><head><title>Print</title>');
+        printWindow.document.write('<link rel="stylesheet" href="style.css">');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write('<h2>Nimed ja piletid</h2>');
+        namesAndComments.forEach(item => {
+            const number = item.querySelector('span').textContent;
+            const name = item.querySelector('input').value;
+            const comments = item.querySelector('textarea').value;
+            printWindow.document.write(`<p><strong>${number}</strong></p>`);
+            printWindow.document.write(`<p>${name}</p>`);
+            printWindow.document.write(`<p>${comments}</p>`);
+        });
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    };
+
     generateBtn.addEventListener('click', generateNumber);
+    printBtn.addEventListener('click', printSidebar);
 
     // Create a dark mode toggle button
     const darkModeBtn = document.createElement('button');
