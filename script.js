@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxInput = document.getElementById('max');
     const numberDisplay = document.getElementById('number-display');
     const generatedNumbersContainer = document.getElementById('generated-numbers');
+    const nameList = document.getElementById('name-list');
+    const body = document.body;
 
     let numberPool = [];
     let usedNumbers = [];
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         numberDisplay.textContent = randomNumber;
         displayGeneratedNumber(randomNumber);
+        addNameFields(randomNumber);
     };
 
     const reintroduceNumber = (number) => {
@@ -62,5 +65,49 @@ document.addEventListener('DOMContentLoaded', () => {
         generatedNumbersContainer.appendChild(numberElement);
     };
 
+    const addNameFields = (number) => {
+        const listItem = document.createElement('li');
+        
+        const inputContainer = document.createElement('div');
+        inputContainer.classList.add('input-container');
+        
+        const numberSpan = document.createElement('span');
+        numberSpan.textContent = number;
+        
+        const nameInput = document.createElement('input');
+        nameInput.placeholder = `Nimi`;
+
+        const commentInput = document.createElement('textarea');
+        commentInput.placeholder = `Kommentaarid`;
+        commentInput.classList.add('comment-input');
+
+        inputContainer.appendChild(numberSpan);
+        inputContainer.appendChild(nameInput);
+        
+        listItem.appendChild(inputContainer);
+        listItem.appendChild(commentInput);
+        
+        nameList.appendChild(listItem);
+    };
+
+    const toggleDarkMode = () => {
+        body.classList.toggle('dark-mode');
+        const icon = darkModeBtn.querySelector('i');
+        if (body.classList.contains('dark-mode')) {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        } else {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    };
+
     generateBtn.addEventListener('click', generateNumber);
+
+    // Create a dark mode toggle button
+    const darkModeBtn = document.createElement('button');
+    darkModeBtn.classList.add('dark-mode-btn');
+    darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+    darkModeBtn.addEventListener('click', toggleDarkMode);
+    document.body.appendChild(darkModeBtn);
 });
