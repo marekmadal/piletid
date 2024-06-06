@@ -257,12 +257,12 @@ button:hover {
     background-color: #104e8b;
 }
 
-.dark-mode .pagination-btn {
+.dark-mode .pagination-btn, .dark-mode #print-btn, .dark-mode #hide-btn {
     background-color: #888;
     color: #f0f0f0;
 }
 
-.dark-mode .pagination-btn:hover {
+.dark-mode .pagination-btn:hover, .dark-mode #print-btn:hover, .dark-mode #hide-btn:hover {
     background-color: #666;
 }
 
